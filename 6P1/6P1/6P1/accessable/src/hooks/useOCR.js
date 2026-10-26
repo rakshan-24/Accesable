@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import Tesseract from 'tesseract.js';
-import { getDocument } from 'pdfjs-dist';
+import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
+
+GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString();
 
 export const useOCR = (language = 'eng') => {
   const [loading, setLoading] = useState(false);

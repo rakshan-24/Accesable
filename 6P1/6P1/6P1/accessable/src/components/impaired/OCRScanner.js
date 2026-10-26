@@ -42,8 +42,9 @@ const OCRScanner = () => {
     }
 
     try {
-      const rawText = await scanImage(file);
-      if (!rawText || rawText.trim().length === 0) {
+      const result = await scanImage(file);
+      const rawText = result?.text || '';
+      if (!rawText.trim()) {
         setErrorMsg('No text could be extracted. Please ensure document lighting is clear.');
         await speak('No text found in document.');
         return;
